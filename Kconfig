@@ -1,12 +1,30 @@
 menu "LMIC"
 
+choice LMIC_LORAWAN_VERSION
+    prompt "LoRaWAN version"
+    config LMIC_LORAWAN_VERSION_1_0_3
+        bool "1.0.3"
+    config LMIC_LORAWAN_VERSION_1_0_2
+        bool "1.0.2"
+endchoice
+
 choice LMIC_DEFAULT_FREQ_BAND
     prompt "Default frequency band"
     config LMIC_FREQ_USE_EU_868
-        bool "868 MHz EU"
+        bool "EU 863-870 MHz ISM"
     config LMIC_FREQ_USE_US_915
-        bool "915 MHz US"
-endchoice
+        bool "US 902-928 MHz ISM"
+    config LMIC_FREQ_USE_AU_915
+        bool "Australia 915-928 MHz ISM"
+    config LMIC_FREQ_USE_AS_923
+        bool "Asia 923 MHz ISM"
+    config LMIC_FREQ_USE_AS_923JP
+        bool "Asia 923 MHz ISM with Japan listen-before-talk (LBT) rules"
+    config LMIC_FREQ_USE_KR_920
+        bool "Korea 920-923 MHz ISM"
+    config LMIC_FREQ_USE_IN_866
+        bool "India 865-867 MHz ISM"
+    endchoice
 
 choice LMIC_SX_CHIP
     prompt "LoRa chip"
@@ -16,17 +34,44 @@ choice LMIC_SX_CHIP
         bool "SX1272"
 endchoice
 
-choice LMIC_LORAWAN_VERSION
-    prompt "LoRaWAN version"
-    config LMIC_LORAWAN_VERSION_1_0_3
-        bool "1.0.3"
-    config LMIC_LORAWAN_VERSION_1_0_2
-        bool "1.0.2"
-endchoice
-
 config LMIC_DEBUG_LEVEL
     int "LMIC debug level"
     range 0 2
     default 0
+
+menu "Features"
+
+    config LMIC_FEATURE_USE_INTERRUPTS
+        bool "Interrupts"
+        help
+            Enable this option to use interrupts for LoRaWAN communication.
+            Be aware that interrupts are not tested or supported on many
+            platforms.
+        default n
+
+    config LMIC_FEATURE_PING
+        bool "Ping"
+        help 
+            Enable code required for Class B downlink during ping slots
+            (PING).
+        default y
+    
+    config LMIC_FEATURE_BEACONS
+        bool "Beacons"
+        help 
+            Enable code required for beacon tracking
+        default y
+        
+    config LMIC_FEATURE_JOIN
+        bool "Join"
+        help 
+            Enable code required for OTA activation
+        default y
+
+
+
+
+    endmenu
+
 
 endmenu

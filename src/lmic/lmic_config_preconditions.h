@@ -93,10 +93,26 @@ Revision history:
 
 #include "sdkconfig.h"
 
+#if defined(CONFIG_LMIC_LORAWAN_VERSION_1_0_2)
+#define LMIC_LORAWAN_SPEC_VERSION LMIC_LORAWAN_SPEC_VERSION_1_0_2
+#elif defined(CONFIG_LMIC_LORAWAN_VERSION_1_0_3)
+#define LMIC_LORAWAN_SPEC_VERSION LMIC_LORAWAN_SPEC_VERSION_1_0_3
+#endif
+
 #if defined(CONFIG_LMIC_FREQ_USE_EU_868)
 #define CFG_eu868 1
 #elif defined(CONFIG_LMIC_FREQ_USE_US_915)
+#define CFG_us915 1
+#elif defined(CONFIG_LMIC_FREQ_USE_AU_915)
 #define CFG_au915 1
+#elif defined(CONFIG_LMIC_FREQ_USE_AS_923)
+#define CFG_as923 1
+#elif defined(CONFIG_LMIC_FREQ_USE_AS_923JP)
+#define CFG_as923jp 1
+#elif defined(CONFIG_LMIC_FREQ_USE_KR_920)
+#define CFG_kr920 1
+#elif defined(CONFIG_LMIC_FREQ_USE_IN_866)
+#define CFG_in866 1
 #endif
 
 #if defined(CONFIG_LMIC_USE_SX1276)
@@ -105,8 +121,20 @@ Revision history:
 #define CFG_sx1272_radio 1
 #endif
 
-#if defined(CONFIG_LMIC_LORAWAN_VERSION_1_0_2)
-#define LMIC_LORAWAN_SPEC_VERSION LMIC_LORAWAN_SPEC_VERSION_1_0_2
+#if defined(CONFIG_LMIC_FEATURE_USE_INTERRUPTS)
+#define LMIC_USE_INTERRUPTS 1
+#endif
+
+#if !defined(CONFIG_LMIC_FEATURE_PING)
+#define DISABLE_PING 1
+#endif
+
+#if !defined(CONFIG_LMIC_FEATURE_BEACONS)
+#define DISABLE_BEACONS 1
+#endif
+
+#if !defined(CONFIG_LMIC_FEATURE_JOIN)
+#define DISABLE_JOIN 1
 #endif
 
 #endif  // ESP_PLATFORM
