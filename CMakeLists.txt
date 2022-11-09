@@ -51,4 +51,4 @@ idf_component_register(
     INCLUDE_DIRS "src"
     REQUIRES arduino)
 
-project(LMIC_LoraWAN)
+project(arduino-lmic)
