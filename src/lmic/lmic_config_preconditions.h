@@ -90,6 +90,8 @@ Revision history:
 
 // Suppress Arduino-style configuration
 #define ARDUINO_LMIC_PROJECT_CONFIG_H_SUPPRESS
+// rename hal_init to LMICHAL_init to aavoid name clash
+#define hal_init LMICHAL_init
 
 #include "sdkconfig.h"
 
