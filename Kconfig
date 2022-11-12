@@ -1,4 +1,4 @@
-menu "LMIC"
+menu "Arduino LMIC"
 
 choice LMIC_LORAWAN_VERSION
     prompt "LoRaWAN version"
