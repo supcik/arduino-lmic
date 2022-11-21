@@ -13,7 +13,7 @@ name: Arduino CI
 
 # global environment
 env:
-  MCCI_CI_LIBRARY:  arduino-lmic
+  MCCI_CI_LIBRARY: arduino-lmic
 
 # specify the events that trigger runs.
 on:
@@ -25,15 +25,14 @@ on:
   repository_dispatch:
   schedule:
     # do a build once a week at 06:07Z Sunday
-    - cron: '7 6 * * 0'
-  
+    - cron: "7 6 * * 0"
+
 # what to do:
 jobs:
-  
   # define a job named "arduinocli"
   arduinocli:
     # select a target OS
-    runs-on:  ubuntu-latest
+    runs-on: ubuntu-latest
     name: ${{ matrix.arch }}
 
     strategy:
@@ -53,7 +52,7 @@ jobs:
       - uses: actions/checkout@v2
         name: Set up mcci-catena-ci
         with:
-          repository: mcci-catena/mcci-catena-ci
+          repository: supcik/mcci-catena-ci
           path: mcci-catena-ci
 
       - name: "Get library: Adafruit_Sensor"
@@ -82,5 +81,4 @@ jobs:
 
       - name: Compile examples
         run: bash mcci-catena-ci/arduino-lmic-regress-wrap.sh -l libraries/${{env.MCCI_CI_LIBRARY}} -a ${{ matrix.arch }}
-
 ### end of file ###
